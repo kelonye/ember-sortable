@@ -1,0 +1,16 @@
+{
+  "name": "ember-sortable",
+  "version": "0.0.1",
+  "license": "MIT",
+  "description": "jQuery UI ember view component",
+  "dependencies": {
+    "kelonye/ember": "*",
+    "kelonye/jquery-ui": "*"
+  },
+  "development": {
+    "component/assert": "*"
+  },
+  "scripts": [
+    "index.js"
+  ]
+}
