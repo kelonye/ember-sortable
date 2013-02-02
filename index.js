@@ -5,18 +5,16 @@ get = Em.get;
 
 set = Em.set;
 
-module.exports = Em.Mixin.create({
-  tagName: 'ul',
-  classNames: ['sortable'],
-  didInsertElement: function() {
-    var controller, el, that;
-    require('jquery-ui');
-    that = this;
-    controller = get(that, 'controller');
-    el = this.$();
-    el.sortable({
-      axis: 'y',
-      update: function(event, ui) {
+module.exports = function(options) {
+  return Em.Mixin.create({
+    tagName: 'ul',
+    classNames: ['sortable'],
+    didInsertElement: function() {
+      var controller, el, that;
+      require('jquery-ui');
+      that = this;
+      controller = get(that, 'controller');
+      options.update = function(event, ui) {
         var rows;
         rows = that.$('> li').toArray();
         return rows.forEach(function(row, position) {
@@ -26,8 +24,9 @@ module.exports = Em.Mixin.create({
           controller = get(that, 'controller');
           return controller.updateItem(item, position + 1);
         });
-      }
-    });
-    return el.disableSelection();
-  }
-});
+      };
+      el = this.$();
+      return el.sortable(options);
+    }
+  });
+};

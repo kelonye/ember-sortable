@@ -5,6 +5,13 @@ Install
 component install kelonye/ember-sortable
 ```
 
+App
+---
+
+Params
+
+  * options: options to pass to sortable method
+
 Example
 ---
 
@@ -28,7 +35,7 @@ App.SortableItemView = Em.View.extend
     {{/with}}
   """
 
-App.SortableView = Em.CollectionView.extend require('ember-sortable'),
+App.SortableView = Em.CollectionView.extend require('ember-sortable')({axis:'y'}),
   contentBinding: 'controller.content'
   itemViewClass: App.SortableItemView
 ```
