@@ -1,22 +1,18 @@
-JADE = test/support/index.jade
-HTML = $(JADE:.jade=.html)
+all: node_modules lib lib/index.js lib/style.css
 
-COFFEE = test/index.coffee index.coffee
-JS = $(COFFEE:.coffee=.js)
+node_modules: package.json
+	@npm install
 
-# test: build
-# 	@mocha-phantomjs -R dot test/support/index.html
+lib:
+	@mkdir -p lib
 
-build: $(HTML) $(JS)
-#	@component build --dev
+lib/index.js: src/index.coffee
+	coffee -bcj $@ $<
 
-%.html: %.jade
-	jade < $< --path $< > $@
-
-%.js: %.coffee
-	coffee -bc $<
+lib/style.css: src/style.styl
+	stylus --compress < $< > $@
 
 clean:
-	rm -rf $(HTML) $(JS) build
+	@rm -rf lib
 
-.PHONY: clean test
+.PHONY: clean

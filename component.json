@@ -7,10 +7,11 @@
     "kelonye/ember": "*",
     "kelonye/jquery-ui": "*"
   },
-  "development": {
-    "component/assert": "*"
-  },
   "scripts": [
-    "index.js"
+    "index.js",
+    "lib/index.js"
+  ],
+  "styles": [
+    "lib/style.css"
   ]
 }

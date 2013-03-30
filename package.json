@@ -2,13 +2,9 @@
   "name": "ember-sortable",
   "version": "0.0.1",
   "license": "MIT",
-  "description": "",
+  "description": "jQuery UI ember view component",
   "devDependencies": {
     "coffee-script": "*",
-    "mocha-phantomjs": "*",
-    "component": "*",
-    "jade": "*",
-    "mocha": "*"
-  },
-  "script": "npm install && component install && make test"
+    "stylus": "*"
+  }
 }
