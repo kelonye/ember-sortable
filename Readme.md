@@ -5,7 +5,12 @@ Install
 component install kelonye/ember-sortable
 ```
 
-App
+Usage
+----------
+
+See [demo](http://kelonye.github.com/ember-sortable/example/index.html)
+
+Api
 ---
 
 Params
@@ -22,9 +27,12 @@ App.SortableController = Em.ArrayController.extend
       'score': 1,
       'name': '..' 
     }
-  ]
-  updateItem: (item, position)->
-    set item, 'score', position
+  ].map (content, index, self)->
+    Em.Object.create content,
+      init: ->
+        Em.addObserver @, '__position__', ->
+          position = @get '__position__'
+          @set 'score', position
 
 App.SortableItemView = Em.View.extend
   tagName: 'li'

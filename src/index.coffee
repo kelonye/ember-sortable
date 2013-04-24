@@ -1,5 +1,4 @@
-get = Em.get
-set = Em.set
+require 'ember'
 
 module.exports = (options)->
 
@@ -12,15 +11,14 @@ module.exports = (options)->
       require 'jquery-ui'
 
       that = @
-      controller = get that, 'controller'
+      controller = that.get 'controller'
 
       options.update = (event, ui) ->
         rows = that.$('> li').toArray()
         rows.forEach (row, position)->
           view = Em.View.views[$(row).attr('id')]
-          item = get view, 'content'
-          controller = get that, 'controller'
-          controller.updateItem item, position+1
+          item = view.get 'content'
+          item.set '__position__', (position + 1)
 
       el = @$()
       el.sortable options

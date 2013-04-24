@@ -1,0 +1,45 @@
+!!! 5
+html
+  head
+    link(href='../build/build.css', rel='stylesheet', media='screen')
+
+  body
+
+    script(src='../build/build.js')
+    :coffeescript
+
+      mixin = require 'ember-sortable'
+      
+      compile = Em.Handlebars.compile
+
+      controller = Em.ArrayController.create
+        content:
+          [
+            'ember'
+            'redis'
+            'express'
+            'mocha'
+          ].map (content, index, self)->
+            Em.Object.create
+              score: index
+              content: content
+              init: ->
+                Em.addObserver @, '__position__', ->
+                  position = @get '__position__'
+                  @set 'score', position
+
+      SortableItemView = Em.View.extend
+        tagName: 'li'
+        template: compile """
+          {{#with view.content}}
+          {{content}}
+          <em>{{score}}</em>
+          {{/with}}
+        """
+
+      SortableView = Em.CollectionView.extend mixin({'axis': 'y'}),
+        content: controller.content
+        itemViewClass: SortableItemView
+
+      view = SortableView.create()
+      view.appendTo 'body'
