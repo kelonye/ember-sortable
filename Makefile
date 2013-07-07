@@ -1,27 +1,20 @@
-all: node_modules components build example/index.html
+component = ./node_modules/component-hooks/node_modules/.bin/component
+
+default: node_modules components public
 
 node_modules:
 	@npm install
 
 components:
-	@component install --dev
+	@$(component) install --dev
 
-lib:
-	@mkdir -p lib
+public: lib/index.js lib/style.css
+	@$(component) build --dev -n $@ -o $@
 
-lib/index.js: src/index.coffee
-	coffee -bcj $@ $<
-
-lib/style.css: src/style.styl
-	stylus --compress < $< > $@
-
-build: lib lib/index.js lib/style.css
-	@component build --dev
-
-example/index.html: example/index.jade
-	jade < $< > $@
+example: default
+	@xdg-open example/index.html
 
 clean:
-	@rm -rf lib example/index.html build
+	@rm -rf public
 
-.PHONY: clean
+.PHONY: clean example

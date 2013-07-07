@@ -1,1 +1,3 @@
-.component-sortable li{cursor:move}
+.component-sortable li{
+  cursor: move;
+}

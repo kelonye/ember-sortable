@@ -1,18 +1,17 @@
 {
   "name": "ember-sortable",
-  "repo": "kelonye/ember-sortable",
   "version": "0.0.1",
-  "license": "MIT",
   "description": "jQuery UI ember view component",
   "dependencies": {
     "kelonye/ember": "*",
     "kelonye/jquery-ui": "*"
   },
+  "main": "lib/index.js",
   "scripts": [
-    "index.js",
     "lib/index.js"
   ],
   "styles": [
     "lib/style.css"
-  ]
+  ],
+  "license": "MIT"
 }

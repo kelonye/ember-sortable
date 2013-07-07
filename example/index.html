@@ -1,43 +1,47 @@
-<!DOCTYPE html><html><head><link href="../build/build.css" rel="stylesheet" media="screen"></head><body><script src="../build/build.js"></script><script type="text/javascript">
-(function() {
-  var SortableItemView, SortableView, compile, controller, mixin, view;
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="../public/public.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+    <script src="../public/public.js"></script>
+    <script type="text/javascript">
 
-  mixin = require('ember-sortable');
-
-  compile = Em.Handlebars.compile;
-
-  controller = Em.ArrayController.create({
-    content: ['ember', 'redis', 'express', 'mocha'].map(function(content, index, self) {
-      return Em.Object.create({
-        score: index,
-        content: content,
-        init: function() {
-          return Em.addObserver(this, '__position__', function() {
-            var position;
-
-            position = this.get('__position__');
-            return this.set('score', position);
+      var mixin = require('ember-sortable');
+      var compile = Em.Handlebars.compile;
+      var controller = Em.ArrayController.create({
+        content: ['ember', 'redis', 'express', 'mocha'].map(function(content, index, self) {
+          return Em.Object.create({
+            score: index,
+            content: content,
+            init: function() {
+              Em.addObserver(this, '__position__', function() {
+                var position;
+                position = this.get('__position__');
+                this.set('score', position);
+              });
+            }
           });
-        }
+        })
       });
-    })
-  });
 
-  SortableItemView = Em.View.extend({
-    tagName: 'li',
-    template: compile("{{#with view.content}}\n{{content}}\n<em>{{score}}</em>\n{{/with}}")
-  });
+      var SortableItemView = Em.View.extend({
+        tagName: 'li',
+        template: compile("{{#with view.content}}{{content}}<em>{{score}}</em>{{/with}}")
+      });
 
-  SortableView = Em.CollectionView.extend(mixin({
-    'axis': 'y'
-  }), {
-    content: controller.content,
-    itemViewClass: SortableItemView
-  });
+      var SortableView = Em.CollectionView.extend(
+        mixin({
+          'axis': 'y'
+        }), {
+          content: controller.content,
+          itemViewClass: SortableItemView
+        }
+      );
 
-  view = SortableView.create();
+      var view = SortableView.create();
+      view.appendTo('body');
 
-  view.appendTo('body');
-
-}).call(this);
-</script></body></html>
+    </script>
+  </body>
+</html>

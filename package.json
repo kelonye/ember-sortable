@@ -4,7 +4,6 @@
   "license": "MIT",
   "description": "jQuery UI ember view component",
   "devDependencies": {
-    "coffee-script": "*",
-    "stylus": "*"
+    "component-hooks": "*"
   }
 }
