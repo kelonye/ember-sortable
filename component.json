@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "description": "jQuery UI ember view component",
   "dependencies": {
-    "kelonye/ember": "*",
-    "kelonye/jquery-ui": "*"
+    "kelonye/ember": "1.0.0-rc6",
+    "kelonye/jquery-ui": "1.10.3"
   },
   "main": "lib/index.js",
   "scripts": [
